@@ -3,13 +3,17 @@
  *     GPLv3 License
  */
 
+import 'package:dokter_grammar/pages/halaman_latihan_custom.dart';
 import 'package:dokter_grammar/pages/halaman_latihan_harian.dart';
 import 'package:dokter_grammar/pages/halaman_tes_utama.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dokter_grammar/pages/halaman_profil_user.dart';
+import 'package:dokter_grammar/services/hive_storage_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await HiveStorageService.init();
   runApp(const DokterGrammarApp());
 }
 
@@ -49,7 +53,11 @@ class DokterGrammarApp extends StatelessWidget {
             centerTitle: true,
           ),
         ),
-        home: const SplashScreen(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const SplashScreen(),
+          '/home': (context) => const HomeScreen(),
+        },
       ),
     );
   }
@@ -75,17 +83,14 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _initializeApp() async {
     await Future.delayed(const Duration(seconds: 2));
     if (mounted) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-      );
+      Navigator.pushReplacementNamed(context, '/home');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFE57F),
+      backgroundColor: const Color.fromARGB(255, 255, 171, 110),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -112,7 +117,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: const Icon(
                 Icons.menu_book_rounded,
                 size: 60,
-                color: Color(0xFF8C6C00),
+                color: Color.fromARGB(255, 209, 129, 0),
               ),
             ),
             const SizedBox(height: 24),
@@ -300,7 +305,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   elevation: 5,
                 ),
                 onPressed: () => _showMainMenu(context),
-                child: const Text('Start'),
+                child: const Text('Mulai'),
               ),
             ],
           ),
@@ -529,7 +534,7 @@ class _MainMenuSheet extends StatelessWidget {
             ),
           ),
           const Text(
-            'Learning Modules',
+            'Mau mulai apa?',
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w700,
@@ -544,19 +549,19 @@ class _MainMenuSheet extends StatelessWidget {
                 _MenuBar(
                     title: 'User Profile',
                     icon: Icons.account_circle_rounded,
-                    page: ProfileScreen()),
+                    page: HalamanProfilUser()),
                 _MenuBar(
                     title: 'Daily Practice',
                     icon: Icons.calendar_month_rounded,
-                    page: DailyPracticeScreen()),
+                    page: HalamanLatihanHarian()),
                 _MenuBar(
                     title: 'Custom Practice',
                     icon: Icons.tune_rounded,
-                    page: CustomPracticeScreen()),
+                    page: HalamanLatihanCustom()),
                 _MenuBar(
                     title: 'Main Test',
                     icon: Icons.quiz_rounded,
-                    page: MainTestScreen()),
+                    page: HalamanTesUtama()),
               ],
             ),
           ),
