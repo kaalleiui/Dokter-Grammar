@@ -1,0 +1,34 @@
+[
+  {
+    "id": "present_simple_1",
+    "category": "tenses",
+    "subcategory": "present_simple",
+    "difficulty": "beginner",
+    "questionTemplate": "Choose the correct form: [subject] [verb] to school every day.",
+    "correctAnswerTemplate": "[subject] [verb_s] to school every day.",
+    "distractorTemplates": [
+      "[subject] [verb]ing to school every day.",
+      "[subject] [verb_past] to school every day.",
+      "[subject] [verb] to school yesterday."
+    ],
+    "explanationTemplate": "In present simple tense, we add 's' to the verb when the subject is '[subject]'.",
+    "grammarTags": ["present_simple", "third_person"],
+    "placeholders": ["subject", "verb", "verb_s", "verb_ing", "verb_past"]
+  },
+  {
+    "id": "articles_1",
+    "category": "articles",
+    "subcategory": "indefinite_articles",
+    "difficulty": "beginner",
+    "questionTemplate": "Choose the correct article: I see ___ [noun].",
+    "correctAnswerTemplate": "I see [article] [noun].",
+    "distractorTemplates": [
+      "I see a [noun].",
+      "I see the [noun].",
+      "I see an [noun]."
+    ],
+    "explanationTemplate": "We use '[article]' before '[noun]' because it [article_reason].",
+    "grammarTags": ["articles", "indefinite"],
+    "placeholders": ["noun", "article", "article_reason"]
+  }
+]

@@ -1,0 +1,290 @@
+[
+  {
+    "id": "present_simple_affirmative",
+    "name": "Present Simple Affirmative",
+    "description": "Grammar rules for constructing present simple affirmative sentences",
+    "rules": [
+      {
+        "id": "ps_affirmative_singular",
+        "category": "tenses",
+        "subcategory": "present_simple",
+        "difficulty": "beginner",
+        "nonTerminal": "S",
+        "productions": ["NP VP"],
+        "grammarTags": ["present_simple", "affirmative"],
+        "weight": 1.0
+      },
+      {
+        "id": "ps_np_singular",
+        "category": "tenses",
+        "subcategory": "present_simple",
+        "difficulty": "beginner",
+        "nonTerminal": "NP",
+        "productions": ["[subject]"],
+        "grammarTags": ["noun_phrase", "singular"],
+        "weight": 1.0
+      },
+      {
+        "id": "ps_vp_singular",
+        "category": "tenses",
+        "subcategory": "present_simple",
+        "difficulty": "beginner",
+        "nonTerminal": "VP",
+        "productions": ["[verb_s] [object]"],
+        "grammarTags": ["verb_phrase", "third_person_singular"],
+        "weight": 1.0
+      },
+      {
+        "id": "ps_object",
+        "category": "tenses",
+        "subcategory": "present_simple",
+        "difficulty": "beginner",
+        "nonTerminal": "object",
+        "productions": ["[article] [noun]"],
+        "grammarTags": ["object", "article"],
+        "weight": 1.0
+      }
+    ],
+    "startSymbol": "S"
+  },
+  {
+    "id": "present_simple_negative",
+    "name": "Present Simple Negative",
+    "description": "Grammar rules for constructing present simple negative sentences",
+    "rules": [
+      {
+        "id": "ps_negative_singular",
+        "category": "tenses",
+        "subcategory": "present_simple",
+        "difficulty": "beginner",
+        "nonTerminal": "S",
+        "productions": ["NP do not VP"],
+        "grammarTags": ["present_simple", "negative"],
+        "weight": 1.0
+      },
+      {
+        "id": "ps_negative_third",
+        "category": "tenses",
+        "subcategory": "present_simple",
+        "difficulty": "beginner",
+        "nonTerminal": "S",
+        "productions": ["NP does not VP"],
+        "grammarTags": ["present_simple", "negative", "third_person"],
+        "weight": 1.0
+      },
+      {
+        "id": "ps_np_negative",
+        "category": "tenses",
+        "subcategory": "present_simple",
+        "difficulty": "beginner",
+        "nonTerminal": "NP",
+        "productions": ["[subject]"],
+        "grammarTags": ["noun_phrase"],
+        "weight": 1.0
+      },
+      {
+        "id": "ps_vp_negative",
+        "category": "tenses",
+        "subcategory": "present_simple",
+        "difficulty": "beginner",
+        "nonTerminal": "VP",
+        "productions": ["[verb_base] [object]"],
+        "grammarTags": ["verb_phrase", "base_form"],
+        "weight": 1.0
+      }
+    ],
+    "startSymbol": "S"
+  },
+  {
+    "id": "present_continuous_affirmative",
+    "name": "Present Continuous Affirmative",
+    "description": "Grammar rules for constructing present continuous affirmative sentences",
+    "rules": [
+      {
+        "id": "pc_affirmative",
+        "category": "tenses",
+        "subcategory": "present_continuous",
+        "difficulty": "intermediate",
+        "nonTerminal": "S",
+        "productions": ["NP be VP"],
+        "grammarTags": ["present_continuous", "affirmative"],
+        "weight": 1.0
+      },
+      {
+        "id": "pc_np",
+        "category": "tenses",
+        "subcategory": "present_continuous",
+        "difficulty": "intermediate",
+        "nonTerminal": "NP",
+        "productions": ["[subject]"],
+        "grammarTags": ["noun_phrase"],
+        "weight": 1.0
+      },
+      {
+        "id": "pc_be_singular",
+        "category": "tenses",
+        "subcategory": "present_continuous",
+        "difficulty": "intermediate",
+        "nonTerminal": "be",
+        "productions": ["is"],
+        "grammarTags": ["be_verb", "singular"],
+        "weight": 1.0
+      },
+      {
+        "id": "pc_be_plural",
+        "category": "tenses",
+        "subcategory": "present_continuous",
+        "difficulty": "intermediate",
+        "nonTerminal": "be",
+        "productions": ["are"],
+        "grammarTags": ["be_verb", "plural"],
+        "weight": 1.0
+      },
+      {
+        "id": "pc_vp",
+        "category": "tenses",
+        "subcategory": "present_continuous",
+        "difficulty": "intermediate",
+        "nonTerminal": "VP",
+        "productions": ["[verb_ing] [object]"],
+        "grammarTags": ["verb_phrase", "continuous_form"],
+        "weight": 1.0
+      }
+    ],
+    "startSymbol": "S"
+  },
+  {
+    "id": "articles_a_an",
+    "name": "Articles A/An",
+    "description": "Grammar rules for constructing sentences with articles a/an",
+    "rules": [
+      {
+        "id": "article_sentence",
+        "category": "articles",
+        "subcategory": "a_an_the",
+        "difficulty": "beginner",
+        "nonTerminal": "S",
+        "productions": ["NP VP"],
+        "grammarTags": ["articles", "sentence"],
+        "weight": 1.0
+      },
+      {
+        "id": "article_np",
+        "category": "articles",
+        "subcategory": "a_an_the",
+        "difficulty": "beginner",
+        "nonTerminal": "NP",
+        "productions": ["[article] [noun]"],
+        "grammarTags": ["noun_phrase", "article"],
+        "weight": 1.0
+      },
+      {
+        "id": "article_vp",
+        "category": "articles",
+        "subcategory": "a_an_the",
+        "difficulty": "beginner",
+        "nonTerminal": "VP",
+        "productions": ["[verb_s] [adverb]"],
+        "grammarTags": ["verb_phrase"],
+        "weight": 1.0
+      }
+    ],
+    "startSymbol": "S"
+  },
+  {
+    "id": "prepositions_basic",
+    "name": "Basic Prepositions",
+    "description": "Grammar rules for constructing sentences with basic prepositions",
+    "rules": [
+      {
+        "id": "prep_location",
+        "category": "prepositions",
+        "subcategory": "time_place",
+        "difficulty": "beginner",
+        "nonTerminal": "S",
+        "productions": ["NP VP PP"],
+        "grammarTags": ["prepositions", "location"],
+        "weight": 1.0
+      },
+      {
+        "id": "prep_pp",
+        "category": "prepositions",
+        "subcategory": "time_place",
+        "difficulty": "beginner",
+        "nonTerminal": "PP",
+        "productions": ["[preposition] [article] [noun]"],
+        "grammarTags": ["prepositional_phrase"],
+        "weight": 1.0
+      },
+      {
+        "id": "prep_np",
+        "category": "prepositions",
+        "subcategory": "time_place",
+        "difficulty": "beginner",
+        "nonTerminal": "NP",
+        "productions": ["[subject]"],
+        "grammarTags": ["noun_phrase"],
+        "weight": 1.0
+      },
+      {
+        "id": "prep_vp",
+        "category": "prepositions",
+        "subcategory": "time_place",
+        "difficulty": "beginner",
+        "nonTerminal": "VP",
+        "productions": ["[verb_s]"],
+        "grammarTags": ["verb_phrase"],
+        "weight": 1.0
+      }
+    ],
+    "startSymbol": "S"
+  },
+  {
+    "id": "questions_wh",
+    "name": "WH Questions",
+    "description": "Grammar rules for constructing WH questions",
+    "rules": [
+      {
+        "id": "wh_question",
+        "category": "questions",
+        "subcategory": "wh_questions",
+        "difficulty": "intermediate",
+        "nonTerminal": "S",
+        "productions": ["WH do NP VP"],
+        "grammarTags": ["questions", "wh_question"],
+        "weight": 1.0
+      },
+      {
+        "id": "wh_word",
+        "category": "questions",
+        "subcategory": "wh_questions",
+        "difficulty": "intermediate",
+        "nonTerminal": "WH",
+        "productions": ["What", "Where", "When", "Why", "How"],
+        "grammarTags": ["question_word"],
+        "weight": 1.0
+      },
+      {
+        "id": "wh_np",
+        "category": "questions",
+        "subcategory": "wh_questions",
+        "difficulty": "intermediate",
+        "nonTerminal": "NP",
+        "productions": ["[subject]"],
+        "grammarTags": ["noun_phrase"],
+        "weight": 1.0
+      },
+      {
+        "id": "wh_vp",
+        "category": "questions",
+        "subcategory": "wh_questions",
+        "difficulty": "intermediate",
+        "nonTerminal": "VP",
+        "productions": ["[verb_base] [object]"],
+        "grammarTags": ["verb_phrase", "base_form"],
+        "weight": 1.0
+      }
+    ],
+    "startSymbol": "S"
+  }
+]

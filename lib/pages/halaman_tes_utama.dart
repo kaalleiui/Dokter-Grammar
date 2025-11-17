@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../services/question_generator_service.dart';
+import '../models/answer.dart';
+import '../models/analysis_result.dart';
+import '../services/hive_storage_service.dart';
+import 'halaman_penjelasan_ai.dart';
 
 class HalamanTesUtama extends StatefulWidget {
   const HalamanTesUtama({super.key});
@@ -12,18 +17,17 @@ class _HalamanTesUtamaState extends State<HalamanTesUtama>
     with SingleTickerProviderStateMixin {
   bool started = false;
   int currentQuestion = 0;
+  bool _isLoading = true;
 
-  // 🧩 Mock data pertanyaan (ganti nanti dari backend)
-  final List<Map<String, dynamic>> _questions = List.generate(50, (i) {
-    return {
-      "question": "Question ${i + 1}: Choose the correct grammar form.",
-      "options": ["A. He go", "B. He goes", "C. He gone", "D. He going"],
-      "answer": 1,
-    };
-  });
+  // 🧩 Generated questions from QuestionGeneratorService
+  List<Question> _questions = [];
 
-  // 🗂️ Cache jawaban user (TODO: simpan ke Hive/local)
-  Map<int, int> userAnswers = {};
+  // 🗂️ Cache jawaban user (selected answer text)
+  Map<int, String> userAnswers = {};
+
+  // Services
+  late QuestionGeneratorService _questionGenerator;
+  late HiveStorageService _hiveStorage;
 
   late AnimationController _controller;
   late Animation<Offset> _slideAnimation;
@@ -37,6 +41,25 @@ class _HalamanTesUtamaState extends State<HalamanTesUtama>
         Tween<Offset>(begin: Offset.zero, end: const Offset(-1.2, 0)).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
+
+    // Initialize services and generate questions
+    _initializeServices();
+  }
+
+  Future<void> _initializeServices() async {
+    _questionGenerator = QuestionGeneratorService();
+    _hiveStorage = HiveStorageService();
+
+    await _questionGenerator.initialize();
+
+    // Generate 50 questions for the main test
+    _questions = await _questionGenerator.generateQuestions(
+      count: 50,
+    );
+
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   // 🟢 Start test
@@ -93,11 +116,80 @@ TextButton(
       setState(() => currentQuestion++);
       _controller.reset();
     } else {
-      // ✅ Semua soal selesai → ke hasil tes
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const HalamanHasilTes()),
-      );
+      // ✅ Semua soal selesai → calculate results and navigate to analysis
+      await _finishTest();
+    }
+  }
+
+  Future<void> _finishTest() async {
+    // Calculate score and create analysis
+    int correctAnswers = 0;
+    List<Answer> answers = [];
+    List<String> strengths = [];
+    List<String> weaknesses = [];
+
+    for (int i = 0; i < _questions.length; i++) {
+      final question = _questions[i];
+      final userAnswer = userAnswers[i];
+      final isCorrect = userAnswer == question.correctAnswer;
+
+      if (isCorrect) correctAnswers++;
+
+      answers.add(Answer(
+        question: question.questionText,
+        selectedAnswer: userAnswer ?? '',
+        correctAnswer: question.correctAnswer,
+        isCorrect: isCorrect,
+        explanation: question.explanation,
+      ));
+
+      // Track strengths and weaknesses by category
+      // Note: Question class doesn't have category field, using generic tracking
+      if (isCorrect) {
+        if (!strengths.contains('general')) {
+          strengths.add('general');
+        }
+      } else {
+        if (!weaknesses.contains('general')) {
+          weaknesses.add('general');
+        }
+      }
+    }
+
+    final score = ((correctAnswers / _questions.length) * 100).round();
+
+    // Create analysis result
+    final analysisResult = AnalysisResult(
+      totalQuestions: _questions.length,
+      correctAnswers: correctAnswers,
+      score: score,
+      strengths: strengths,
+      weaknesses: weaknesses,
+      overallFeedback: _generateFeedback(score, strengths, weaknesses),
+    );
+
+    // Save progress to Hive
+    await _hiveStorage.updateUserProgress('user1', score, 'main_test');
+
+    // Navigate to analysis page
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => HalamanPenjelasanAi(
+          analysisResult: analysisResult,
+          answers: answers,
+        ),
+      ),
+    );
+  }
+
+  String _generateFeedback(int score, List<String> strengths, List<String> weaknesses) {
+    if (score >= 80) {
+      return "Excellent performance! You have a strong grasp of English grammar.";
+    } else if (score >= 60) {
+      return "Good job! You have solid grammar knowledge with room for improvement.";
+    } else {
+      return "Keep practicing! Focus on the areas where you need more work.";
     }
   }
 
@@ -264,7 +356,7 @@ TextButton(
   }
 
   /// 🧠 Container Pertanyaan
-  Widget _buildQuestionCard(Map<String, dynamic> q) {
+  Widget _buildQuestionCard(Question q) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -281,7 +373,7 @@ TextButton(
       child: Align(
         alignment: Alignment.topLeft,
         child: Text(
-          q["question"],
+          q.questionText,
           style: GoogleFonts.poppins(
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -293,7 +385,7 @@ TextButton(
   }
 
   /// 🗳️ Container Jawaban
-  Widget _buildAnswerCard(Map<String, dynamic> q) {
+  Widget _buildAnswerCard(Question q) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -308,14 +400,14 @@ TextButton(
         ],
       ),
       child: ListView.builder(
-        itemCount: q["options"].length,
+        itemCount: q.options.length,
         itemBuilder: (context, index) {
-          final selected = userAnswers[currentQuestion] == index;
+          final optionText = q.options[index];
+          final selected = userAnswers[currentQuestion] == optionText;
           return GestureDetector(
             onTap: () {
               setState(() {
-                userAnswers[currentQuestion] = index;
-                // TODO: simpan jawaban ke cache Hive di sini
+                userAnswers[currentQuestion] = optionText;
               });
             },
             child: Container(
@@ -340,7 +432,7 @@ TextButton(
                 ],
               ),
               child: Text(
-                q["options"][index],
+                optionText,
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.bold,
                   color: const Color(0xFF4E4E4E),

@@ -1,19 +1,28 @@
-/*
- *     Copyright (C) 2024 Dokter Grammar
- *     GPLv3 License
- */
+// =============================================================================
+// DOKTER GRAMMAR - APLIKASI PEMBELAJARAN GRAMMAR BAHASA INGGRIS
+// Copyright (C) 2024 Dokter Grammar - GPLv3 License
+// =============================================================================
 
-import 'package:dokter_grammar/pages/halaman_latihan_custom.dart';
-import 'package:dokter_grammar/pages/halaman_latihan_harian.dart';
-import 'package:dokter_grammar/pages/halaman_tes_utama.dart';
+// Import halaman-halaman utama aplikasi
+import 'package:dokter_grammar/pages/halaman_latihan_custom.dart'; // Halaman quiz kustom
+import 'package:dokter_grammar/pages/halaman_latihan_harian.dart'; // Halaman latihan harian
+import 'package:dokter_grammar/pages/halaman_tes_utama.dart'; // Halaman tes utama
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:dokter_grammar/pages/halaman_profil_user.dart';
-import 'package:dokter_grammar/services/hive_storage_service.dart';
+import 'package:dokter_grammar/pages/halaman_profil_user.dart'; // Halaman profil user
+import 'package:dokter_grammar/services/hive_storage_service.dart'; // Service untuk penyimpanan data lokal
 
+// =============================================================================
+// FUNGSI UTAMA APLIKASI
+// =============================================================================
 void main() async {
+  // Pastikan Flutter sudah siap sebelum inisialisasi
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Inisialisasi database Hive untuk penyimpanan offline
   await HiveStorageService.init();
+
+  // Jalankan aplikasi utama
   runApp(const DokterGrammarApp());
 }
 
