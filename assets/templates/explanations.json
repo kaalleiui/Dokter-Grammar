@@ -1,0 +1,42 @@
+{
+  "templates": [
+    {
+      "template_id": "multiple_choice_incorrect",
+      "question_type": "multiple_choice",
+      "template": "The correct answer is {correct_answer}. {rule_explanation} Example: {example_sentence}",
+      "variables": ["correct_answer", "rule_explanation", "example_sentence"]
+    },
+    {
+      "template_id": "multiple_choice_correct",
+      "question_type": "multiple_choice",
+      "template": "Jawaban Anda benar! {correct_answer} adalah pilihan yang tepat. {rule_explanation}",
+      "variables": ["correct_answer", "rule_explanation"]
+    },
+    {
+      "template_id": "gap_fill_tense_error",
+      "question_type": "gap_fill",
+      "topic": "tenses",
+      "template": "You used '{user_answer}', but the correct form is '{correct_answer}' because {tense_rule}. Try: {example}",
+      "variables": ["user_answer", "correct_answer", "tense_rule", "example"]
+    },
+    {
+      "template_id": "gap_fill_correct",
+      "question_type": "gap_fill",
+      "template": "Jawaban Anda benar! '{correct_answer}' adalah bentuk yang tepat. {rule_explanation}",
+      "variables": ["correct_answer", "rule_explanation"]
+    },
+    {
+      "template_id": "reorder_incorrect",
+      "question_type": "reorder",
+      "template": "Urutan yang benar adalah: {correct_answer}. Pastikan kalimat mengikuti struktur yang tepat. Contoh: {example}",
+      "variables": ["correct_answer", "example"]
+    },
+    {
+      "template_id": "short_answer_incorrect",
+      "question_type": "short_answer",
+      "template": "Jawaban yang benar adalah '{correct_answer}'. Jawaban Anda '{user_answer}' tidak sesuai. {rule_explanation}",
+      "variables": ["correct_answer", "user_answer", "rule_explanation"]
+    }
+  ]
+}
+

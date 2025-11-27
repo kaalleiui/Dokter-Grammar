@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "logLevel": "verbose",
+  "logToFile": true,
+  "logToConsole": true,
+  "callbacks": {
+    "onTestStart": true,
+    "onQuestionLoad": true,
+    "onQuestionDisplay": true,
+    "onAnswerSelect": true,
+    "onAnswerSubmit": true,
+    "onQuestionChange": true,
+    "onTestComplete": true,
+    "onScoreCalculate": true,
+    "onLevelUpdate": true,
+    "onPerformanceUpdate": true
+  },
+  "includeTimestamps": true,
+  "includeUserData": false,
+  "includeQuestionData": true,
+  "includePerformanceMetrics": true,
+  "maxLogEntries": 1000,
+  "exportFormat": "json"
+}
+

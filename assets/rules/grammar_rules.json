@@ -1,0 +1,83 @@
+{
+  "rules": [
+    {
+      "rule_id": "conditional_3_structure",
+      "topic": "conditionals",
+      "pattern": "if + past_perfect + would_have + past_participle",
+      "explanation_template": "This is a third conditional for past hypothetical situations. Structure: if + past perfect, would have + past participle.",
+      "example_correct": "If I had known, I would have gone.",
+      "common_errors": [
+        {
+          "error_pattern": "if + past_simple + would_have",
+          "explanation": "Use past perfect (had + past participle) in the if-clause, not simple past."
+        }
+      ]
+    },
+    {
+      "rule_id": "relative_clause_which_vs_that",
+      "topic": "complex_sentences",
+      "pattern": "relative_clause_pronoun_selection",
+      "explanation_template": "Use 'which' for non-restrictive clauses (with comma) and 'that' for restrictive clauses (no comma).",
+      "example_correct": "The book, which I read yesterday, was excellent.",
+      "common_errors": [
+        {
+          "error_pattern": "that_with_comma",
+          "explanation": "Don't use 'that' with commas. Use 'which' for non-restrictive clauses."
+        }
+      ]
+    },
+    {
+      "rule_id": "simple_past_tense",
+      "topic": "tenses",
+      "pattern": "past_action_completed",
+      "explanation_template": "Simple past tense is used for completed actions in the past. Form: subject + verb2 (past tense).",
+      "example_correct": "I went to the store yesterday.",
+      "common_errors": [
+        {
+          "error_pattern": "present_tense_for_past",
+          "explanation": "Use past tense form of the verb for actions completed in the past."
+        }
+      ]
+    },
+    {
+      "rule_id": "present_perfect_tense",
+      "topic": "tenses",
+      "pattern": "past_action_relevant_present",
+      "explanation_template": "Present perfect is used for actions that started in the past and are still relevant. Form: have/has + past participle.",
+      "example_correct": "I have lived here for five years.",
+      "common_errors": [
+        {
+          "error_pattern": "simple_past_for_present_perfect",
+          "explanation": "Use present perfect (have/has + past participle) when the action is still relevant to the present."
+        }
+      ]
+    },
+    {
+      "rule_id": "passive_voice_structure",
+      "topic": "passive_voice",
+      "pattern": "be + past_participle",
+      "explanation_template": "Passive voice: be + past participle. The object becomes the subject, and the original subject becomes optional (with 'by').",
+      "example_correct": "The lesson was explained by the teacher.",
+      "common_errors": [
+        {
+          "error_pattern": "missing_be_verb",
+          "explanation": "Passive voice requires 'be' verb (am, is, are, was, were) + past participle."
+        }
+      ]
+    },
+    {
+      "rule_id": "articles_a_vs_an",
+      "topic": "articles_determiners",
+      "pattern": "article_selection",
+      "explanation_template": "Use 'a' before consonant sounds and 'an' before vowel sounds. It depends on the sound, not the letter.",
+      "example_correct": "I saw an elephant at the zoo.",
+      "common_errors": [
+        {
+          "error_pattern": "a_before_vowel_sound",
+          "explanation": "Use 'an' before words starting with a vowel sound, not just vowel letters."
+        }
+      ]
+    }
+  ]
+}
+
